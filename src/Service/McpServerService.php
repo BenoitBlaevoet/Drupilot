@@ -2,16 +2,16 @@
 
 declare(strict_types=1);
 
-namespace Drupal\drupal_mcp\Service;
+namespace Drupal\drupilot\Service;
 
 use Drupal\Core\Logger\LoggerChannelInterface;
 use Drupal\Core\Utility\Error;
-use Drupal\drupal_mcp\Exception\McpException;
-use Drupal\drupal_mcp\Plugin\McpTool\McpToolInterface;
-use Drupal\drupal_mcp\PluginManager\McpToolPluginManager;
-use Drupal\drupal_mcp\ValueObject\McpError;
-use Drupal\drupal_mcp\ValueObject\McpRequest;
-use Drupal\drupal_mcp\ValueObject\McpResponse;
+use Drupal\drupilot\Exception\McpException;
+use Drupal\drupilot\Plugin\McpTool\McpToolInterface;
+use Drupal\drupilot\PluginManager\McpToolPluginManager;
+use Drupal\drupilot\ValueObject\McpError;
+use Drupal\drupilot\ValueObject\McpRequest;
+use Drupal\drupilot\ValueObject\McpResponse;
 
 /**
  * Protocol-level handler for MCP JSON-RPC requests.
@@ -21,12 +21,12 @@ final class McpServerService {
   /**
    * Constructs the service.
    *
-   * @param \Drupal\drupal_mcp\PluginManager\McpToolPluginManager $pluginManager
+   * @param \Drupal\drupilot\PluginManager\McpToolPluginManager $pluginManager
    *   The MCP tool plugin manager.
    * @param ToolRegistryService $toolRegistry
    *   The tool enable/disable registry.
    * @param \Drupal\Core\Logger\LoggerChannelInterface $logger
-   *   Logger channel for the drupal_mcp module.
+   *   Logger channel for the drupilot module.
    */
   public function __construct(
     private readonly McpToolPluginManager $pluginManager,
@@ -60,7 +60,7 @@ final class McpServerService {
     return McpResponse::success($request->id, [
       'protocolVersion' => '2024-11-05',
       'capabilities' => ['tools' => (object) []],
-      'serverInfo' => ['name' => 'drupal_mcp', 'version' => '1.0.0'],
+      'serverInfo' => ['name' => 'drupilot', 'version' => '1.0.0'],
     ]);
   }
 

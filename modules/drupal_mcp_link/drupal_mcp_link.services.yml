@@ -1,5 +1,0 @@
-services:
-  drupal_mcp_link.field_type_provider:
-    class: Drupal\drupal_mcp_link\FieldType\LinkFieldTypeProvider
-    tags:
-      - { name: drupal_mcp.field_type_provider }

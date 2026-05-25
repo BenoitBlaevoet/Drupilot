@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace Drupal\Tests\drupal_mcp\Unit\Plugin\McpTool\Role;
+namespace Drupal\Tests\drupilot\Unit\Plugin\McpTool\Role;
 
 use Drupal\Core\Config\Entity\ConfigEntityInterface;
 use Drupal\Core\Entity\EntityStorageInterface;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Logger\LoggerChannelInterface;
 use Drupal\Tests\UnitTestCase;
-use Drupal\drupal_mcp\Plugin\McpTool\Role\DeleteRoleTool;
-use Drupal\drupal_mcp\ValueObject\McpError;
+use Drupal\drupilot\Plugin\McpTool\Role\DeleteRoleTool;
+use Drupal\drupilot\ValueObject\McpError;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Group;
@@ -19,7 +19,7 @@ use PHPUnit\Framework\Attributes\Group;
  * Tests the security guards in DeleteRoleTool.
  */
 #[CoversClass(DeleteRoleTool::class)]
-#[Group('drupal_mcp')]
+#[Group('drupilot')]
 final class DeleteRoleToolTest extends UnitTestCase {
 
   /**
@@ -28,7 +28,7 @@ final class DeleteRoleToolTest extends UnitTestCase {
    * @param \Drupal\Core\Entity\EntityStorageInterface $storage
    *   The user_role entity storage mock.
    *
-   * @return \Drupal\drupal_mcp\Plugin\McpTool\Role\DeleteRoleTool
+   * @return \Drupal\drupilot\Plugin\McpTool\Role\DeleteRoleTool
    *   The tool under test.
    */
   private function buildTool(EntityStorageInterface $storage): DeleteRoleTool {

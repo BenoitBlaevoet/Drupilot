@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Drupal\drupal_mcp\ValueObject;
+namespace Drupal\drupilot\ValueObject;
 
 /**
  * Immutable JSON-RPC 2.0 response envelope.
@@ -20,7 +20,7 @@ final readonly class McpResponse {
    *   Correlation id mirrored from the request.
    * @param array<string, mixed>|null $result
    *   Success payload, or null for error responses.
-   * @param \Drupal\drupal_mcp\ValueObject\McpError|null $error
+   * @param \Drupal\drupilot\ValueObject\McpError|null $error
    *   Error object, or null for success responses.
    */
   public function __construct(
@@ -56,7 +56,7 @@ final readonly class McpResponse {
    * @param string|int|null $id
    *   Correlation id from the originating request, or null when unavailable.
    * @param int $code
-   *   JSON-RPC error code (see \Drupal\drupal_mcp\ValueObject\McpError).
+   *   JSON-RPC error code (see \Drupal\drupilot\ValueObject\McpError).
    * @param string $message
    *   Sanitized human-readable message — never include stack traces.
    * @param array<string, mixed>|null $data

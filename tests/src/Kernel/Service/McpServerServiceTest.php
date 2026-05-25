@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Drupal\Tests\drupal_mcp\Kernel\Service;
+namespace Drupal\Tests\drupilot\Kernel\Service;
 
 use Drupal\KernelTests\KernelTestBase;
-use Drupal\drupal_mcp\Service\McpServerService;
-use Drupal\drupal_mcp\Service\ToolRegistryService;
-use Drupal\drupal_mcp\ValueObject\McpError;
-use Drupal\drupal_mcp\ValueObject\McpRequest;
+use Drupal\drupilot\Service\McpServerService;
+use Drupal\drupilot\Service\ToolRegistryService;
+use Drupal\drupilot\ValueObject\McpError;
+use Drupal\drupilot\ValueObject\McpRequest;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\Group;
 use PHPUnit\Framework\Attributes\RunTestsInSeparateProcesses;
@@ -20,7 +20,7 @@ use PHPUnit\Framework\Attributes\RunTestsInSeparateProcesses;
  * class that cannot be mocked in pure unit tests, requiring real DI wiring.
  */
 #[CoversClass(McpServerService::class)]
-#[Group('drupal_mcp')]
+#[Group('drupilot')]
 #[RunTestsInSeparateProcesses]
 final class McpServerServiceTest extends KernelTestBase {
 
@@ -40,7 +40,7 @@ final class McpServerServiceTest extends KernelTestBase {
     'media',
     'file',
     'image',
-    'drupal_mcp',
+    'drupilot',
   ];
 
   /**
@@ -58,14 +58,14 @@ final class McpServerServiceTest extends KernelTestBase {
    */
   protected function setUp(): void {
     parent::setUp();
-    $this->installConfig(['drupal_mcp']);
+    $this->installConfig(['drupilot']);
 
-    /** @var \Drupal\drupal_mcp\Service\McpServerService $server */
-    $server = $this->container->get('drupal_mcp.server');
+    /** @var \Drupal\drupilot\Service\McpServerService $server */
+    $server = $this->container->get('drupilot.server');
     $this->server = $server;
 
-    /** @var \Drupal\drupal_mcp\Service\ToolRegistryService $registry */
-    $registry = $this->container->get('drupal_mcp.tool_registry');
+    /** @var \Drupal\drupilot\Service\ToolRegistryService $registry */
+    $registry = $this->container->get('drupilot.tool_registry');
     $this->registry = $registry;
   }
 

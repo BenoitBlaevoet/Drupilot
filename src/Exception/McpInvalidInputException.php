@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Drupal\drupal_mcp\Exception;
+namespace Drupal\drupilot\Exception;
 
 /**
  * Thrown when a tool's input fails schema or business validation.

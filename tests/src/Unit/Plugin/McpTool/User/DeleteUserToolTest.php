@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Drupal\Tests\drupal_mcp\Unit\Plugin\McpTool\User;
+namespace Drupal\Tests\drupilot\Unit\Plugin\McpTool\User;
 
 use Drupal\Core\Entity\EntityStorageInterface;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Logger\LoggerChannelInterface;
 use Drupal\Tests\UnitTestCase;
-use Drupal\drupal_mcp\Plugin\McpTool\User\DeleteUserTool;
-use Drupal\drupal_mcp\ValueObject\McpError;
+use Drupal\drupilot\Plugin\McpTool\User\DeleteUserTool;
+use Drupal\drupilot\ValueObject\McpError;
 use Drupal\user\UserInterface;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\Group;
@@ -18,7 +18,7 @@ use PHPUnit\Framework\Attributes\Group;
  * Tests the security guards in DeleteUserTool.
  */
 #[CoversClass(DeleteUserTool::class)]
-#[Group('drupal_mcp')]
+#[Group('drupilot')]
 final class DeleteUserToolTest extends UnitTestCase {
 
   /**
@@ -27,7 +27,7 @@ final class DeleteUserToolTest extends UnitTestCase {
    * @param \Drupal\Core\Entity\EntityStorageInterface $storage
    *   The user entity storage mock.
    *
-   * @return \Drupal\drupal_mcp\Plugin\McpTool\User\DeleteUserTool
+   * @return \Drupal\drupilot\Plugin\McpTool\User\DeleteUserTool
    *   The tool under test.
    */
   private function buildTool(EntityStorageInterface $storage): DeleteUserTool {

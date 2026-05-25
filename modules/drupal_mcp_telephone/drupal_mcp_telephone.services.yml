@@ -1,5 +1,0 @@
-services:
-  drupal_mcp_telephone.field_type_provider:
-    class: Drupal\drupal_mcp_telephone\FieldType\TelephoneFieldTypeProvider
-    tags:
-      - { name: drupal_mcp.field_type_provider }

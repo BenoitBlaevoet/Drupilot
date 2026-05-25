@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Drupal\Tests\drupal_mcp\Unit\Plugin\McpTool\MediaType;
+namespace Drupal\Tests\drupilot\Unit\Plugin\McpTool\MediaType;
 
 use Drupal\Core\Entity\Query\QueryInterface;
 use Drupal\Core\Entity\EntityInterface;
@@ -10,8 +10,8 @@ use Drupal\Core\Entity\EntityStorageInterface;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Logger\LoggerChannelInterface;
 use Drupal\Tests\UnitTestCase;
-use Drupal\drupal_mcp\Plugin\McpTool\MediaType\DeleteMediaTypeTool;
-use Drupal\drupal_mcp\ValueObject\McpError;
+use Drupal\drupilot\Plugin\McpTool\MediaType\DeleteMediaTypeTool;
+use Drupal\drupilot\ValueObject\McpError;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Group;
@@ -20,7 +20,7 @@ use PHPUnit\Framework\Attributes\Group;
  * Tests the core-bundle protection guard in DeleteMediaTypeTool.
  */
 #[CoversClass(DeleteMediaTypeTool::class)]
-#[Group('drupal_mcp')]
+#[Group('drupilot')]
 final class DeleteMediaTypeToolTest extends UnitTestCase {
 
   /**
@@ -29,7 +29,7 @@ final class DeleteMediaTypeToolTest extends UnitTestCase {
    * @param \Drupal\Core\Entity\EntityStorageInterface $mediaTypeStorage
    *   The media_type entity storage mock.
    *
-   * @return \Drupal\drupal_mcp\Plugin\McpTool\MediaType\DeleteMediaTypeTool
+   * @return \Drupal\drupilot\Plugin\McpTool\MediaType\DeleteMediaTypeTool
    *   The tool under test.
    */
   private function buildTool(EntityStorageInterface $mediaTypeStorage): DeleteMediaTypeTool {

@@ -1,0 +1,13 @@
+drupilot.settings:
+  type: config_object
+  label: 'Drupilot settings'
+  mapping:
+    bearer_token:
+      type: string
+      label: 'Bearer token for MCP authentication'
+    enabled_tools:
+      type: sequence
+      label: 'Enabled tool IDs'
+      sequence:
+        type: string
+        label: 'Tool ID'

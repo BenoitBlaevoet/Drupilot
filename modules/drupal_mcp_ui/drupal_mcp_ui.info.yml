@@ -1,7 +1,0 @@
-name: 'Drupal MCP UI'
-type: module
-description: 'Administration UI for the Drupal MCP module (bearer token, tool toggles).'
-package: Custom
-core_version_requirement: ^11
-dependencies:
-  - drupal_mcp:drupal_mcp

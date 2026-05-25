@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Drupal\Tests\drupal_mcp\Unit\Service;
+namespace Drupal\Tests\drupilot\Unit\Service;
 
 use Drupal\Core\Config\Config;
 use Drupal\Core\Config\ConfigFactoryInterface;
 use Drupal\Core\Config\ImmutableConfig;
 use Drupal\Tests\UnitTestCase;
-use Drupal\drupal_mcp\Service\ToolRegistryService;
+use Drupal\drupilot\Service\ToolRegistryService;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\Group;
 
@@ -16,7 +16,7 @@ use PHPUnit\Framework\Attributes\Group;
  * Tests ToolRegistryService enabled/disabled state management.
  */
 #[CoversClass(ToolRegistryService::class)]
-#[Group('drupal_mcp')]
+#[Group('drupilot')]
 final class ToolRegistryServiceTest extends UnitTestCase {
 
   /**
@@ -33,7 +33,7 @@ final class ToolRegistryServiceTest extends UnitTestCase {
 
     $factory = $this->createMock(ConfigFactoryInterface::class);
     $factory->method('get')
-      ->with('drupal_mcp.settings')
+      ->with('drupilot.settings')
       ->willReturn($config);
 
     return new ToolRegistryService($factory);
@@ -96,7 +96,7 @@ final class ToolRegistryServiceTest extends UnitTestCase {
 
     $factory = $this->createMock(ConfigFactoryInterface::class);
     $factory->method('get')
-      ->with('drupal_mcp.settings')
+      ->with('drupilot.settings')
       ->willReturn($config);
 
     $registry = new ToolRegistryService($factory);
@@ -128,10 +128,10 @@ final class ToolRegistryServiceTest extends UnitTestCase {
 
     $factory = $this->createMock(ConfigFactoryInterface::class);
     $factory->method('get')
-      ->with('drupal_mcp.settings')
+      ->with('drupilot.settings')
       ->willReturn($immutable);
     $factory->method('getEditable')
-      ->with('drupal_mcp.settings')
+      ->with('drupilot.settings')
       ->willReturn($editable);
 
     $registry = new ToolRegistryService($factory);
@@ -153,10 +153,10 @@ final class ToolRegistryServiceTest extends UnitTestCase {
 
     $factory = $this->createMock(ConfigFactoryInterface::class);
     $factory->method('get')
-      ->with('drupal_mcp.settings')
+      ->with('drupilot.settings')
       ->willReturn($immutable);
     $factory->method('getEditable')
-      ->with('drupal_mcp.settings')
+      ->with('drupilot.settings')
       ->willReturn($editable);
 
     $registry = new ToolRegistryService($factory);
@@ -186,10 +186,10 @@ final class ToolRegistryServiceTest extends UnitTestCase {
 
     $factory = $this->createMock(ConfigFactoryInterface::class);
     $factory->method('get')
-      ->with('drupal_mcp.settings')
+      ->with('drupilot.settings')
       ->willReturn($immutable);
     $factory->method('getEditable')
-      ->with('drupal_mcp.settings')
+      ->with('drupilot.settings')
       ->willReturn($editable);
 
     $registry = new ToolRegistryService($factory);
@@ -211,10 +211,10 @@ final class ToolRegistryServiceTest extends UnitTestCase {
 
     $factory = $this->createMock(ConfigFactoryInterface::class);
     $factory->method('get')
-      ->with('drupal_mcp.settings')
+      ->with('drupilot.settings')
       ->willReturn($immutable);
     $factory->method('getEditable')
-      ->with('drupal_mcp.settings')
+      ->with('drupilot.settings')
       ->willReturn($editable);
 
     $registry = new ToolRegistryService($factory);

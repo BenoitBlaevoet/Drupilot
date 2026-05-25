@@ -1,0 +1,15 @@
+{
+  "name": "drupal/drupilot",
+  "description": "Expose a Model Context Protocol (MCP) server over HTTP, enabling AI agents to exercise full programmatic control over a Drupal 11 site.",
+  "type": "drupal-module",
+  "license": "GPL-2.0-or-later",
+  "require": {
+    "php": ">=8.3",
+    "drupal/core": "^11"
+  },
+  "suggest": {
+    "drupal/paragraphs": "Required for drupilot_paragraphs sub-module",
+    "drupal/field_group": "Required for drupilot_field_group sub-module",
+    "drupal/layout_paragraphs": "Required for drupilot_layout_paragraphs sub-module"
+  }
+}

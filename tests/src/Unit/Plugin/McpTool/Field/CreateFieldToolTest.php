@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace Drupal\Tests\drupal_mcp\Unit\Plugin\McpTool\Field;
+namespace Drupal\Tests\drupilot\Unit\Plugin\McpTool\Field;
 
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Logger\LoggerChannelInterface;
 use Drupal\Tests\UnitTestCase;
-use Drupal\drupal_mcp\FieldType\FieldTypeCollector;
-use Drupal\drupal_mcp\FieldType\FieldTypeProviderInterface;
-use Drupal\drupal_mcp\Plugin\McpTool\Field\CreateFieldTool;
-use Drupal\drupal_mcp\ValueObject\McpError;
+use Drupal\drupilot\FieldType\FieldTypeCollector;
+use Drupal\drupilot\FieldType\FieldTypeProviderInterface;
+use Drupal\drupilot\Plugin\McpTool\Field\CreateFieldTool;
+use Drupal\drupilot\ValueObject\McpError;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Group;
@@ -22,7 +22,7 @@ use PHPUnit\Framework\Attributes\Group;
  * require no Drupal bootstrap.
  */
 #[CoversClass(CreateFieldTool::class)]
-#[Group('drupal_mcp')]
+#[Group('drupilot')]
 final class CreateFieldToolTest extends UnitTestCase {
 
   /**
@@ -36,7 +36,7 @@ final class CreateFieldToolTest extends UnitTestCase {
    * The entity type manager is never reached when the media-convention guard
    * fires, so it is mocked as an unused stub.
    *
-   * @return \Drupal\drupal_mcp\Plugin\McpTool\Field\CreateFieldTool
+   * @return \Drupal\drupilot\Plugin\McpTool\Field\CreateFieldTool
    *   The tool under test.
    */
   private function buildTool(): CreateFieldTool {

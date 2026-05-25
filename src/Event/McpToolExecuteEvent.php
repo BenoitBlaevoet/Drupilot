@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Drupal\drupal_mcp\Event;
+namespace Drupal\drupilot\Event;
 
 use Symfony\Contracts\EventDispatcher\Event;
 
@@ -13,7 +13,7 @@ use Symfony\Contracts\EventDispatcher\Event;
  */
 final class McpToolExecuteEvent extends Event {
 
-  public const string EVENT_NAME = 'drupal_mcp.tool_execute';
+  public const string EVENT_NAME = 'drupilot.tool_execute';
 
   /**
    * Constructs the event.

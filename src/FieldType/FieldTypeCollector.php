@@ -2,21 +2,21 @@
 
 declare(strict_types=1);
 
-namespace Drupal\drupal_mcp\FieldType;
+namespace Drupal\drupilot\FieldType;
 
 /**
  * Aggregates all tagged field type providers into a single deduplicated list.
  *
- * Injected via `!tagged_iterator drupal_mcp.field_type_provider` so that
- * enabling any drupal_mcp_* sub-module automatically extends the list.
+ * Injected via `!tagged_iterator drupilot.field_type_provider` so that
+ * enabling any drupilot_* sub-module automatically extends the list.
  */
 final class FieldTypeCollector {
 
   /**
    * Constructs the collector.
    *
-   * @param iterable<\Drupal\drupal_mcp\FieldType\FieldTypeProviderInterface> $providers
-   *   All services tagged with drupal_mcp.field_type_provider.
+   * @param iterable<\Drupal\drupilot\FieldType\FieldTypeProviderInterface> $providers
+   *   All services tagged with drupilot.field_type_provider.
    */
   public function __construct(
     private readonly iterable $providers,

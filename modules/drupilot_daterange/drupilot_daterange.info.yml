@@ -1,0 +1,8 @@
+name: 'Drupilot — Date range field'
+type: module
+description: 'Adds daterange field type support to the drupilot field_create tool. Requires the core Datetime Range module.'
+package: AI
+core_version_requirement: ^11
+dependencies:
+  - drupilot:drupilot
+  - drupal:datetime_range

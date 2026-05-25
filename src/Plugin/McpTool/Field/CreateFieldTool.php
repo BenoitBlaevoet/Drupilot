@@ -2,18 +2,18 @@
 
 declare(strict_types=1);
 
-namespace Drupal\drupal_mcp\Plugin\McpTool\Field;
+namespace Drupal\drupilot\Plugin\McpTool\Field;
 
 use Drupal\Core\Entity\EntityStorageException;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Field\FieldStorageDefinitionInterface;
 use Drupal\Core\Logger\LoggerChannelInterface;
 use Drupal\Core\Utility\Error;
-use Drupal\drupal_mcp\Attribute\McpTool;
-use Drupal\drupal_mcp\FieldType\FieldTypeCollector;
-use Drupal\drupal_mcp\Plugin\McpTool\McpToolInterface;
-use Drupal\drupal_mcp\ValueObject\McpError;
-use Drupal\drupal_mcp\ValueObject\McpResponse;
+use Drupal\drupilot\Attribute\McpTool;
+use Drupal\drupilot\FieldType\FieldTypeCollector;
+use Drupal\drupilot\Plugin\McpTool\McpToolInterface;
+use Drupal\drupilot\ValueObject\McpError;
+use Drupal\drupilot\ValueObject\McpResponse;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
@@ -34,7 +34,7 @@ final class CreateFieldTool implements McpToolInterface {
    *   The entity type manager.
    * @param \Drupal\Core\Logger\LoggerChannelInterface $logger
    *   The logger channel.
-   * @param \Drupal\drupal_mcp\FieldType\FieldTypeCollector $fieldTypeCollector
+   * @param \Drupal\drupilot\FieldType\FieldTypeCollector $fieldTypeCollector
    *   Aggregated field type provider.
    */
   public function __construct(
@@ -61,11 +61,11 @@ final class CreateFieldTool implements McpToolInterface {
     mixed $plugin_id,
     mixed $plugin_definition,
   ): static {
-    /** @var \Drupal\drupal_mcp\FieldType\FieldTypeCollector $collector */
-    $collector = $container->get('drupal_mcp.field_type_collector');
+    /** @var \Drupal\drupilot\FieldType\FieldTypeCollector $collector */
+    $collector = $container->get('drupilot.field_type_collector');
     return new static(
       $container->get('entity_type.manager'),
-      $container->get('logger.channel.drupal_mcp'),
+      $container->get('logger.channel.drupilot'),
       $collector,
     );
   }
@@ -140,7 +140,7 @@ final class CreateFieldTool implements McpToolInterface {
         return McpResponse::error(
           NULL,
           McpError::INVALID_PARAMS,
-          sprintf("Field type '%s' is not supported. Enable the corresponding drupal_mcp_* sub-module.", $fieldType),
+          sprintf("Field type '%s' is not supported. Enable the corresponding drupilot_* sub-module.", $fieldType),
         );
       }
 

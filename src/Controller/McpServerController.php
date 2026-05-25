@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Drupal\drupal_mcp\Controller;
+namespace Drupal\drupilot\Controller;
 
 use Drupal\Core\DependencyInjection\ContainerInjectionInterface;
-use Drupal\drupal_mcp\Service\McpServerService;
-use Drupal\drupal_mcp\ValueObject\McpError;
-use Drupal\drupal_mcp\ValueObject\McpRequest;
-use Drupal\drupal_mcp\ValueObject\McpResponse;
+use Drupal\drupilot\Service\McpServerService;
+use Drupal\drupilot\ValueObject\McpError;
+use Drupal\drupilot\ValueObject\McpRequest;
+use Drupal\drupilot\ValueObject\McpResponse;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -32,8 +32,8 @@ final class McpServerController implements ContainerInjectionInterface {
    * {@inheritdoc}
    */
   public static function create(ContainerInterface $container): static {
-    /** @var \Drupal\drupal_mcp\Service\McpServerService $service */
-    $service = $container->get('drupal_mcp.server');
+    /** @var \Drupal\drupilot\Service\McpServerService $service */
+    $service = $container->get('drupilot.server');
     return new static($service);
   }
 

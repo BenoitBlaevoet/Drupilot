@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Drupal\Tests\drupal_mcp\Unit\Access;
+namespace Drupal\Tests\drupilot\Unit\Access;
 
 use Drupal\Core\Access\AccessResultAllowed;
 use Drupal\Core\Access\AccessResultForbidden;
@@ -10,7 +10,7 @@ use Drupal\Core\Cache\CacheableDependencyInterface;
 use Drupal\Core\Config\ConfigFactoryInterface;
 use Drupal\Core\Config\ImmutableConfig;
 use Drupal\Tests\UnitTestCase;
-use Drupal\drupal_mcp\Access\McpTokenAccessCheck;
+use Drupal\drupilot\Access\McpTokenAccessCheck;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\Group;
 use Symfony\Component\HttpFoundation\Request;
@@ -19,7 +19,7 @@ use Symfony\Component\HttpFoundation\Request;
  * Tests McpTokenAccessCheck bearer-token validation.
  */
 #[CoversClass(McpTokenAccessCheck::class)]
-#[Group('drupal_mcp')]
+#[Group('drupilot')]
 final class McpTokenAccessCheckTest extends UnitTestCase {
 
   private const string VALID_TOKEN = 'super-secret-bearer-token';
@@ -38,7 +38,7 @@ final class McpTokenAccessCheckTest extends UnitTestCase {
 
     $factory = $this->createMock(ConfigFactoryInterface::class);
     $factory->method('get')
-      ->with('drupal_mcp.settings')
+      ->with('drupilot.settings')
       ->willReturn($config);
 
     return new McpTokenAccessCheck($factory);

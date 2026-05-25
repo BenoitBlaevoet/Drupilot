@@ -2,17 +2,17 @@
 
 declare(strict_types=1);
 
-namespace Drupal\drupal_mcp\Plugin\McpTool\Node;
+namespace Drupal\drupilot\Plugin\McpTool\Node;
 
 use Drupal\Core\Entity\EntityStorageException;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Logger\LoggerChannelInterface;
 use Drupal\Core\Session\AccountProxyInterface;
 use Drupal\Core\Utility\Error;
-use Drupal\drupal_mcp\Attribute\McpTool;
-use Drupal\drupal_mcp\Plugin\McpTool\McpToolInterface;
-use Drupal\drupal_mcp\ValueObject\McpError;
-use Drupal\drupal_mcp\ValueObject\McpResponse;
+use Drupal\drupilot\Attribute\McpTool;
+use Drupal\drupilot\Plugin\McpTool\McpToolInterface;
+use Drupal\drupilot\ValueObject\McpError;
+use Drupal\drupilot\ValueObject\McpResponse;
 use Drupal\node\NodeInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
@@ -64,7 +64,7 @@ final class UpdateNodeTool implements McpToolInterface {
     return new static(
       $container->get('entity_type.manager'),
       $container->get('current_user'),
-      $container->get('logger.channel.drupal_mcp'),
+      $container->get('logger.channel.drupilot'),
     );
   }
 

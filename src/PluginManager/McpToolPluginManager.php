@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace Drupal\drupal_mcp\PluginManager;
+namespace Drupal\drupilot\PluginManager;
 
 use Drupal\Core\Cache\CacheBackendInterface;
 use Drupal\Core\Extension\ModuleHandlerInterface;
 use Drupal\Core\Plugin\DefaultPluginManager;
-use Drupal\drupal_mcp\Attribute\McpTool;
-use Drupal\drupal_mcp\Plugin\McpTool\McpToolInterface;
-use Drupal\drupal_mcp\Service\ToolRegistryService;
-use Drupal\drupal_mcp\ValueObject\ToolDefinition;
+use Drupal\drupilot\Attribute\McpTool;
+use Drupal\drupilot\Plugin\McpTool\McpToolInterface;
+use Drupal\drupilot\Service\ToolRegistryService;
+use Drupal\drupilot\ValueObject\ToolDefinition;
 
 /**
  * Manages MCP tool plugins discovered via the McpTool PHP attribute.
@@ -64,7 +64,7 @@ final class McpToolPluginManager extends DefaultPluginManager {
   /**
    * Returns only the definitions of tools currently enabled.
    *
-   * @param \Drupal\drupal_mcp\Service\ToolRegistryService $registry
+   * @param \Drupal\drupilot\Service\ToolRegistryService $registry
    *   Registry that owns enabled/disabled state.
    *
    * @return array<string, ToolDefinition>
@@ -89,7 +89,7 @@ final class McpToolPluginManager extends DefaultPluginManager {
    * @param mixed $definition
    *   The raw definition returned by DefaultPluginManager.
    *
-   * @return \Drupal\drupal_mcp\ValueObject\ToolDefinition
+   * @return \Drupal\drupilot\ValueObject\ToolDefinition
    *   The value-object representation.
    */
   private function buildToolDefinition(string $id, mixed $definition): ToolDefinition {

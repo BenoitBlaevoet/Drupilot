@@ -1,0 +1,8 @@
+name: 'Drupilot — Telephone field'
+type: module
+description: 'Adds telephone field type support to the drupilot field_create tool. Requires the core Telephone module.'
+package: AI
+core_version_requirement: ^11
+dependencies:
+  - drupilot:drupilot
+  - drupal:telephone

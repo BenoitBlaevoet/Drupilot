@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Drupal\drupal_mcp\FieldType;
+namespace Drupal\drupilot\FieldType;
 
 /**
  * Provides field types available in Drupal core without extra modules.

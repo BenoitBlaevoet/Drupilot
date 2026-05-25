@@ -1,0 +1,9 @@
+drupilot.server:
+  path: '/mcp/v1'
+  defaults:
+    _controller: '\Drupal\drupilot\Controller\McpServerController::handle'
+  methods: [POST]
+  requirements:
+    _drupilot_token_access: 'TRUE'
+  options:
+    no_cache: TRUE

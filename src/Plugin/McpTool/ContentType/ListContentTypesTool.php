@@ -2,16 +2,16 @@
 
 declare(strict_types=1);
 
-namespace Drupal\drupal_mcp\Plugin\McpTool\ContentType;
+namespace Drupal\drupilot\Plugin\McpTool\ContentType;
 
 use Drupal\Core\Entity\EntityFieldManagerInterface;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Logger\LoggerChannelInterface;
 use Drupal\Core\Utility\Error;
-use Drupal\drupal_mcp\Attribute\McpTool;
-use Drupal\drupal_mcp\Plugin\McpTool\McpToolInterface;
-use Drupal\drupal_mcp\ValueObject\McpError;
-use Drupal\drupal_mcp\ValueObject\McpResponse;
+use Drupal\drupilot\Attribute\McpTool;
+use Drupal\drupilot\Plugin\McpTool\McpToolInterface;
+use Drupal\drupilot\ValueObject\McpError;
+use Drupal\drupilot\ValueObject\McpResponse;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
@@ -62,7 +62,7 @@ final class ListContentTypesTool implements McpToolInterface {
     return new static(
       $container->get('entity_type.manager'),
       $container->get('entity_field.manager'),
-      $container->get('logger.channel.drupal_mcp'),
+      $container->get('logger.channel.drupilot'),
     );
   }
 

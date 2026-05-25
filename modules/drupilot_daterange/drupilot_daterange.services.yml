@@ -1,0 +1,5 @@
+services:
+  drupilot_daterange.field_type_provider:
+    class: Drupal\drupilot_daterange\FieldType\DateRangeFieldTypeProvider
+    tags:
+      - { name: drupilot.field_type_provider }

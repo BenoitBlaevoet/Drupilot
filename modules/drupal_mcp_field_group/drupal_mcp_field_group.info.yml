@@ -1,8 +1,0 @@
-name: 'Drupal MCP — Field Group'
-type: module
-description: 'Adds field group management tools (create, delete, list). Requires the contrib Field Group module.'
-package: Custom
-core_version_requirement: ^11
-dependencies:
-  - drupal_mcp:drupal_mcp
-  - field_group:field_group

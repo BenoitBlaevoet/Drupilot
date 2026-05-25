@@ -1,0 +1,24 @@
+services:
+  drupilot_field_group.tool.field_group_create:
+    class: Drupal\drupilot_field_group\Plugin\McpTool\FieldGroup\CreateFieldGroupTool
+    arguments:
+      - '@entity_type.manager'
+      - '@logger.channel.drupilot'
+    tags:
+      - { name: mcp_tool }
+
+  drupilot_field_group.tool.field_group_delete:
+    class: Drupal\drupilot_field_group\Plugin\McpTool\FieldGroup\DeleteFieldGroupTool
+    arguments:
+      - '@entity_type.manager'
+      - '@logger.channel.drupilot'
+    tags:
+      - { name: mcp_tool }
+
+  drupilot_field_group.tool.field_group_list:
+    class: Drupal\drupilot_field_group\Plugin\McpTool\FieldGroup\ListFieldGroupsTool
+    arguments:
+      - '@entity_type.manager'
+      - '@logger.channel.drupilot'
+    tags:
+      - { name: mcp_tool }
