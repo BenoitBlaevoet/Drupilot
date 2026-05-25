@@ -1,2 +1,2 @@
 Current maintainers:
- * Blaevoet Benoit (betapply) - https://www.drupal.org/u/betapply
+ * Blaevoet Benoit (kinzo) - https://www.drupal.org/u/kinzo
