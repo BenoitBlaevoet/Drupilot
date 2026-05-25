@@ -1,0 +1,4 @@
+'administer drupal_mcp settings':
+  title: 'Administer drupal_mcp settings'
+  description: 'Manage drupal_mcp UI screens (bearer token, tool toggles).'
+  restrict access: true

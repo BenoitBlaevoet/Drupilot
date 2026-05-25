@@ -1,0 +1,9 @@
+name: 'Drupal MCP — Layout Paragraphs'
+type: module
+description: 'Layout discovery, paragraph type layout configuration, and layout_paragraphs display wiring tools.'
+package: Custom
+core_version_requirement: ^11
+dependencies:
+  - drupal_mcp:drupal_mcp
+  - drupal_mcp:drupal_mcp_paragraphs
+  - layout_paragraphs:layout_paragraphs

@@ -1,0 +1,9 @@
+name: 'Drupal MCP — Paragraphs'
+type: module
+description: 'Adds paragraph type management tools and entity_reference_revisions field type support. Requires paragraphs contrib module.'
+package: Custom
+core_version_requirement: ^11
+dependencies:
+  - drupal_mcp:drupal_mcp
+  - paragraphs:paragraphs
+  - entity_reference_revisions:entity_reference_revisions

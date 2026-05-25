@@ -1,0 +1,295 @@
+services:
+  logger.channel.drupal_mcp:
+    parent: logger.channel_base
+    arguments: ['drupal_mcp']
+
+  drupal_mcp.tool_registry:
+    class: Drupal\drupal_mcp\Service\ToolRegistryService
+    arguments:
+      - '@config.factory'
+
+  plugin.manager.mcp_tool:
+    class: Drupal\drupal_mcp\PluginManager\McpToolPluginManager
+    arguments:
+      - '@container.namespaces'
+      - '@cache.discovery'
+      - '@module_handler'
+
+  drupal_mcp.server:
+    class: Drupal\drupal_mcp\Service\McpServerService
+    arguments:
+      - '@plugin.manager.mcp_tool'
+      - '@drupal_mcp.tool_registry'
+      - '@logger.channel.drupal_mcp'
+
+  drupal_mcp.mcp_server_controller:
+    class: Drupal\drupal_mcp\Controller\McpServerController
+    arguments:
+      - '@drupal_mcp.server'
+
+  drupal_mcp.mcp_token_access_check:
+    class: Drupal\drupal_mcp\Access\McpTokenAccessCheck
+    arguments:
+      - '@config.factory'
+    tags:
+      - { name: access_check, applies_to: _drupal_mcp_token_access }
+
+  plugin.mcp_tool.content_type.create:
+    class: Drupal\drupal_mcp\Plugin\McpTool\ContentType\CreateContentTypeTool
+    arguments:
+      - '@entity_type.manager'
+      - '@logger.channel.drupal_mcp'
+
+  plugin.mcp_tool.content_type.update:
+    class: Drupal\drupal_mcp\Plugin\McpTool\ContentType\UpdateContentTypeTool
+    arguments:
+      - '@entity_type.manager'
+      - '@logger.channel.drupal_mcp'
+
+  plugin.mcp_tool.content_type.delete:
+    class: Drupal\drupal_mcp\Plugin\McpTool\ContentType\DeleteContentTypeTool
+    arguments:
+      - '@entity_type.manager'
+      - '@database'
+      - '@logger.channel.drupal_mcp'
+
+  plugin.mcp_tool.content_type.list:
+    class: Drupal\drupal_mcp\Plugin\McpTool\ContentType\ListContentTypesTool
+    arguments:
+      - '@entity_type.manager'
+      - '@entity_field.manager'
+      - '@logger.channel.drupal_mcp'
+
+  drupal_mcp.field_type_provider.core:
+    class: Drupal\drupal_mcp\FieldType\CoreFieldTypeProvider
+    tags:
+      - { name: drupal_mcp.field_type_provider }
+
+  drupal_mcp.field_type_collector:
+    class: Drupal\drupal_mcp\FieldType\FieldTypeCollector
+    arguments:
+      - !tagged_iterator drupal_mcp.field_type_provider
+
+  drupal_mcp.tool.field_create:
+    class: Drupal\drupal_mcp\Plugin\McpTool\Field\CreateFieldTool
+    arguments:
+      - '@entity_type.manager'
+      - '@logger.channel.drupal_mcp'
+      - '@drupal_mcp.field_type_collector'
+    tags:
+      - { name: mcp_tool }
+
+  drupal_mcp.tool.field_update:
+    class: Drupal\drupal_mcp\Plugin\McpTool\Field\UpdateFieldTool
+    arguments:
+      - '@entity_type.manager'
+      - '@logger.channel.drupal_mcp'
+    tags:
+      - { name: mcp_tool }
+
+  drupal_mcp.tool.field_delete:
+    class: Drupal\drupal_mcp\Plugin\McpTool\Field\DeleteFieldTool
+    arguments:
+      - '@entity_type.manager'
+      - '@logger.channel.drupal_mcp'
+    tags:
+      - { name: mcp_tool }
+
+  drupal_mcp.tool.field_list:
+    class: Drupal\drupal_mcp\Plugin\McpTool\Field\ListFieldsTool
+    arguments:
+      - '@entity_field.manager'
+      - '@logger.channel.drupal_mcp'
+    tags:
+      - { name: mcp_tool }
+
+  drupal_mcp.tool.role_create:
+    class: Drupal\drupal_mcp\Plugin\McpTool\Role\CreateRoleTool
+    arguments:
+      - '@entity_type.manager'
+      - '@logger.channel.drupal_mcp'
+    tags:
+      - { name: mcp_tool }
+
+  drupal_mcp.tool.role_update:
+    class: Drupal\drupal_mcp\Plugin\McpTool\Role\UpdateRoleTool
+    arguments:
+      - '@entity_type.manager'
+      - '@logger.channel.drupal_mcp'
+    tags:
+      - { name: mcp_tool }
+
+  drupal_mcp.tool.role_delete:
+    class: Drupal\drupal_mcp\Plugin\McpTool\Role\DeleteRoleTool
+    arguments:
+      - '@entity_type.manager'
+      - '@logger.channel.drupal_mcp'
+    tags:
+      - { name: mcp_tool }
+
+  drupal_mcp.tool.role_list:
+    class: Drupal\drupal_mcp\Plugin\McpTool\Role\ListRolesTool
+    arguments:
+      - '@entity_type.manager'
+      - '@logger.channel.drupal_mcp'
+    tags:
+      - { name: mcp_tool }
+
+  drupal_mcp.tool.permission_grant:
+    class: Drupal\drupal_mcp\Plugin\McpTool\Permission\GrantPermissionTool
+    arguments:
+      - '@entity_type.manager'
+      - '@user.permissions'
+      - '@logger.channel.drupal_mcp'
+    tags:
+      - { name: mcp_tool }
+
+  drupal_mcp.tool.permission_revoke:
+    class: Drupal\drupal_mcp\Plugin\McpTool\Permission\RevokePermissionTool
+    arguments:
+      - '@entity_type.manager'
+      - '@logger.channel.drupal_mcp'
+    tags:
+      - { name: mcp_tool }
+
+  drupal_mcp.tool.permission_list:
+    class: Drupal\drupal_mcp\Plugin\McpTool\Permission\ListPermissionsTool
+    arguments:
+      - '@entity_type.manager'
+      - '@user.permissions'
+      - '@logger.channel.drupal_mcp'
+    tags:
+      - { name: mcp_tool }
+
+  drupal_mcp.tool.node_create:
+    class: Drupal\drupal_mcp\Plugin\McpTool\Node\CreateNodeTool
+    arguments:
+      - '@entity_type.manager'
+      - '@logger.channel.drupal_mcp'
+    tags:
+      - { name: mcp_tool }
+
+  drupal_mcp.tool.node_update:
+    class: Drupal\drupal_mcp\Plugin\McpTool\Node\UpdateNodeTool
+    arguments:
+      - '@entity_type.manager'
+      - '@current_user'
+      - '@logger.channel.drupal_mcp'
+    tags:
+      - { name: mcp_tool }
+
+  drupal_mcp.tool.node_delete:
+    class: Drupal\drupal_mcp\Plugin\McpTool\Node\DeleteNodeTool
+    arguments:
+      - '@entity_type.manager'
+      - '@current_user'
+      - '@logger.channel.drupal_mcp'
+    tags:
+      - { name: mcp_tool }
+
+  drupal_mcp.tool.node_list:
+    class: Drupal\drupal_mcp\Plugin\McpTool\Node\ListNodesTool
+    arguments:
+      - '@entity_type.manager'
+      - '@logger.channel.drupal_mcp'
+    tags:
+      - { name: mcp_tool }
+
+  # Taxonomy — vocabulary tools
+  drupal_mcp.tool.vocabulary_create:
+    class: Drupal\drupal_mcp\Plugin\McpTool\Taxonomy\CreateVocabularyTool
+    arguments:
+      - '@entity_type.manager'
+      - '@logger.channel.drupal_mcp'
+    tags:
+      - { name: mcp_tool }
+
+  drupal_mcp.tool.vocabulary_update:
+    class: Drupal\drupal_mcp\Plugin\McpTool\Taxonomy\UpdateVocabularyTool
+    arguments:
+      - '@entity_type.manager'
+      - '@logger.channel.drupal_mcp'
+    tags:
+      - { name: mcp_tool }
+
+  drupal_mcp.tool.vocabulary_delete:
+    class: Drupal\drupal_mcp\Plugin\McpTool\Taxonomy\DeleteVocabularyTool
+    arguments:
+      - '@entity_type.manager'
+      - '@logger.channel.drupal_mcp'
+    tags:
+      - { name: mcp_tool }
+
+  drupal_mcp.tool.vocabulary_list:
+    class: Drupal\drupal_mcp\Plugin\McpTool\Taxonomy\ListVocabulariesTool
+    arguments:
+      - '@entity_type.manager'
+      - '@logger.channel.drupal_mcp'
+    tags:
+      - { name: mcp_tool }
+
+  # Taxonomy — term tools
+  drupal_mcp.tool.term_create:
+    class: Drupal\drupal_mcp\Plugin\McpTool\Taxonomy\CreateTermTool
+    arguments:
+      - '@entity_type.manager'
+      - '@logger.channel.drupal_mcp'
+    tags:
+      - { name: mcp_tool }
+
+  drupal_mcp.tool.term_update:
+    class: Drupal\drupal_mcp\Plugin\McpTool\Taxonomy\UpdateTermTool
+    arguments:
+      - '@entity_type.manager'
+      - '@logger.channel.drupal_mcp'
+    tags:
+      - { name: mcp_tool }
+
+  drupal_mcp.tool.term_delete:
+    class: Drupal\drupal_mcp\Plugin\McpTool\Taxonomy\DeleteTermTool
+    arguments:
+      - '@entity_type.manager'
+      - '@logger.channel.drupal_mcp'
+    tags:
+      - { name: mcp_tool }
+
+  drupal_mcp.tool.term_list:
+    class: Drupal\drupal_mcp\Plugin\McpTool\Taxonomy\ListTermsTool
+    arguments:
+      - '@entity_type.manager'
+      - '@logger.channel.drupal_mcp'
+    tags:
+      - { name: mcp_tool }
+
+  # User tools
+  drupal_mcp.tool.user_create:
+    class: Drupal\drupal_mcp\Plugin\McpTool\User\CreateUserTool
+    arguments:
+      - '@entity_type.manager'
+      - '@logger.channel.drupal_mcp'
+    tags:
+      - { name: mcp_tool }
+
+  drupal_mcp.tool.user_update:
+    class: Drupal\drupal_mcp\Plugin\McpTool\User\UpdateUserTool
+    arguments:
+      - '@entity_type.manager'
+      - '@logger.channel.drupal_mcp'
+    tags:
+      - { name: mcp_tool }
+
+  drupal_mcp.tool.user_delete:
+    class: Drupal\drupal_mcp\Plugin\McpTool\User\DeleteUserTool
+    arguments:
+      - '@entity_type.manager'
+      - '@logger.channel.drupal_mcp'
+    tags:
+      - { name: mcp_tool }
+
+  drupal_mcp.tool.user_assign_role:
+    class: Drupal\drupal_mcp\Plugin\McpTool\User\AssignRoleTool
+    arguments:
+      - '@entity_type.manager'
+      - '@logger.channel.drupal_mcp'
+    tags:
+      - { name: mcp_tool }

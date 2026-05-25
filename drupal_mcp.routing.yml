@@ -1,0 +1,9 @@
+drupal_mcp.server:
+  path: '/mcp/v1'
+  defaults:
+    _controller: '\Drupal\drupal_mcp\Controller\McpServerController::handle'
+  methods: [POST]
+  requirements:
+    _drupal_mcp_token_access: 'TRUE'
+  options:
+    no_cache: TRUE

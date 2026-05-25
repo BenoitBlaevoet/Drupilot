@@ -1,0 +1,5 @@
+services:
+  drupal_mcp_daterange.field_type_provider:
+    class: Drupal\drupal_mcp_daterange\FieldType\DateRangeFieldTypeProvider
+    tags:
+      - { name: drupal_mcp.field_type_provider }

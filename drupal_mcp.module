@@ -1,0 +1,24 @@
+<?php
+
+/**
+ * @file
+ * Drupal MCP module file.
+ *
+ * Hooks are intentionally kept minimal. All real logic happens in services and
+ * event subscribers; hook implementations dispatch custom events found in
+ * src/Event/ and handled in src/EventSubscriber/. This keeps the codebase OOP,
+ * testable, and free of procedural drift.
+ *
+ * No hooks are currently implemented. When the need arises, follow this
+ * pattern:
+ *
+ * @code
+ * function drupal_mcp_some_hook(array &$something): void {
+ *   $event = new SomeEvent($something);
+ *   \Drupal::service('event_dispatcher')->dispatch($event);
+ *   $something = $event->getSomething();
+ * }
+ * @endcode
+ */
+
+declare(strict_types=1);

@@ -1,0 +1,8 @@
+name: 'Drupal MCP — Date range field'
+type: module
+description: 'Adds daterange field type support to the drupal_mcp field_create tool. Requires the core Datetime Range module.'
+package: Custom
+core_version_requirement: ^11
+dependencies:
+  - drupal_mcp:drupal_mcp
+  - drupal:datetime_range
