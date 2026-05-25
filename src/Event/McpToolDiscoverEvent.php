@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Drupal\drupal_mcp\Event;
+namespace Drupal\drupilot\Event;
 
 use Symfony\Contracts\EventDispatcher\Event;
 
@@ -14,7 +14,7 @@ use Symfony\Contracts\EventDispatcher\Event;
  */
 final class McpToolDiscoverEvent extends Event {
 
-  public const string EVENT_NAME = 'drupal_mcp.tool_discover';
+  public const string EVENT_NAME = 'drupilot.tool_discover';
 
   /**
    * Constructs the event.

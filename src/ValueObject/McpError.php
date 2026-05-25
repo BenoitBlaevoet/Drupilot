@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Drupal\drupal_mcp\ValueObject;
+namespace Drupal\drupilot\ValueObject;
 
 /**
  * Immutable JSON-RPC 2.0 error object.

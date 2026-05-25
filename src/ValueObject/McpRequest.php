@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Drupal\drupal_mcp\ValueObject;
+namespace Drupal\drupilot\ValueObject;
 
 /**
  * Immutable representation of an incoming MCP JSON-RPC request.

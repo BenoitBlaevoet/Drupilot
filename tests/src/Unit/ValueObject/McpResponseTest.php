@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Drupal\Tests\drupal_mcp\Unit\ValueObject;
+namespace Drupal\Tests\drupilot\Unit\ValueObject;
 
 use Drupal\Tests\UnitTestCase;
-use Drupal\drupal_mcp\ValueObject\McpResponse;
+use Drupal\drupilot\ValueObject\McpResponse;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\Group;
 
@@ -13,7 +13,7 @@ use PHPUnit\Framework\Attributes\Group;
  * Tests McpResponse factory methods and serialisation.
  */
 #[CoversClass(McpResponse::class)]
-#[Group('drupal_mcp')]
+#[Group('drupilot')]
 final class McpResponseTest extends UnitTestCase {
 
   /**

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Drupal\drupal_mcp\Attribute;
+namespace Drupal\drupilot\Attribute;
 
 use Drupal\Component\Plugin\Attribute\Plugin;
 

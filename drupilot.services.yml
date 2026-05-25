@@ -1,0 +1,295 @@
+services:
+  logger.channel.drupilot:
+    parent: logger.channel_base
+    arguments: ['drupilot']
+
+  drupilot.tool_registry:
+    class: Drupal\drupilot\Service\ToolRegistryService
+    arguments:
+      - '@config.factory'
+
+  plugin.manager.mcp_tool:
+    class: Drupal\drupilot\PluginManager\McpToolPluginManager
+    arguments:
+      - '@container.namespaces'
+      - '@cache.discovery'
+      - '@module_handler'
+
+  drupilot.server:
+    class: Drupal\drupilot\Service\McpServerService
+    arguments:
+      - '@plugin.manager.mcp_tool'
+      - '@drupilot.tool_registry'
+      - '@logger.channel.drupilot'
+
+  drupilot.mcp_server_controller:
+    class: Drupal\drupilot\Controller\McpServerController
+    arguments:
+      - '@drupilot.server'
+
+  drupilot.mcp_token_access_check:
+    class: Drupal\drupilot\Access\McpTokenAccessCheck
+    arguments:
+      - '@config.factory'
+    tags:
+      - { name: access_check, applies_to: _drupilot_token_access }
+
+  plugin.mcp_tool.content_type.create:
+    class: Drupal\drupilot\Plugin\McpTool\ContentType\CreateContentTypeTool
+    arguments:
+      - '@entity_type.manager'
+      - '@logger.channel.drupilot'
+
+  plugin.mcp_tool.content_type.update:
+    class: Drupal\drupilot\Plugin\McpTool\ContentType\UpdateContentTypeTool
+    arguments:
+      - '@entity_type.manager'
+      - '@logger.channel.drupilot'
+
+  plugin.mcp_tool.content_type.delete:
+    class: Drupal\drupilot\Plugin\McpTool\ContentType\DeleteContentTypeTool
+    arguments:
+      - '@entity_type.manager'
+      - '@database'
+      - '@logger.channel.drupilot'
+
+  plugin.mcp_tool.content_type.list:
+    class: Drupal\drupilot\Plugin\McpTool\ContentType\ListContentTypesTool
+    arguments:
+      - '@entity_type.manager'
+      - '@entity_field.manager'
+      - '@logger.channel.drupilot'
+
+  drupilot.field_type_provider.core:
+    class: Drupal\drupilot\FieldType\CoreFieldTypeProvider
+    tags:
+      - { name: drupilot.field_type_provider }
+
+  drupilot.field_type_collector:
+    class: Drupal\drupilot\FieldType\FieldTypeCollector
+    arguments:
+      - !tagged_iterator drupilot.field_type_provider
+
+  drupilot.tool.field_create:
+    class: Drupal\drupilot\Plugin\McpTool\Field\CreateFieldTool
+    arguments:
+      - '@entity_type.manager'
+      - '@logger.channel.drupilot'
+      - '@drupilot.field_type_collector'
+    tags:
+      - { name: mcp_tool }
+
+  drupilot.tool.field_update:
+    class: Drupal\drupilot\Plugin\McpTool\Field\UpdateFieldTool
+    arguments:
+      - '@entity_type.manager'
+      - '@logger.channel.drupilot'
+    tags:
+      - { name: mcp_tool }
+
+  drupilot.tool.field_delete:
+    class: Drupal\drupilot\Plugin\McpTool\Field\DeleteFieldTool
+    arguments:
+      - '@entity_type.manager'
+      - '@logger.channel.drupilot'
+    tags:
+      - { name: mcp_tool }
+
+  drupilot.tool.field_list:
+    class: Drupal\drupilot\Plugin\McpTool\Field\ListFieldsTool
+    arguments:
+      - '@entity_field.manager'
+      - '@logger.channel.drupilot'
+    tags:
+      - { name: mcp_tool }
+
+  drupilot.tool.role_create:
+    class: Drupal\drupilot\Plugin\McpTool\Role\CreateRoleTool
+    arguments:
+      - '@entity_type.manager'
+      - '@logger.channel.drupilot'
+    tags:
+      - { name: mcp_tool }
+
+  drupilot.tool.role_update:
+    class: Drupal\drupilot\Plugin\McpTool\Role\UpdateRoleTool
+    arguments:
+      - '@entity_type.manager'
+      - '@logger.channel.drupilot'
+    tags:
+      - { name: mcp_tool }
+
+  drupilot.tool.role_delete:
+    class: Drupal\drupilot\Plugin\McpTool\Role\DeleteRoleTool
+    arguments:
+      - '@entity_type.manager'
+      - '@logger.channel.drupilot'
+    tags:
+      - { name: mcp_tool }
+
+  drupilot.tool.role_list:
+    class: Drupal\drupilot\Plugin\McpTool\Role\ListRolesTool
+    arguments:
+      - '@entity_type.manager'
+      - '@logger.channel.drupilot'
+    tags:
+      - { name: mcp_tool }
+
+  drupilot.tool.permission_grant:
+    class: Drupal\drupilot\Plugin\McpTool\Permission\GrantPermissionTool
+    arguments:
+      - '@entity_type.manager'
+      - '@user.permissions'
+      - '@logger.channel.drupilot'
+    tags:
+      - { name: mcp_tool }
+
+  drupilot.tool.permission_revoke:
+    class: Drupal\drupilot\Plugin\McpTool\Permission\RevokePermissionTool
+    arguments:
+      - '@entity_type.manager'
+      - '@logger.channel.drupilot'
+    tags:
+      - { name: mcp_tool }
+
+  drupilot.tool.permission_list:
+    class: Drupal\drupilot\Plugin\McpTool\Permission\ListPermissionsTool
+    arguments:
+      - '@entity_type.manager'
+      - '@user.permissions'
+      - '@logger.channel.drupilot'
+    tags:
+      - { name: mcp_tool }
+
+  drupilot.tool.node_create:
+    class: Drupal\drupilot\Plugin\McpTool\Node\CreateNodeTool
+    arguments:
+      - '@entity_type.manager'
+      - '@logger.channel.drupilot'
+    tags:
+      - { name: mcp_tool }
+
+  drupilot.tool.node_update:
+    class: Drupal\drupilot\Plugin\McpTool\Node\UpdateNodeTool
+    arguments:
+      - '@entity_type.manager'
+      - '@current_user'
+      - '@logger.channel.drupilot'
+    tags:
+      - { name: mcp_tool }
+
+  drupilot.tool.node_delete:
+    class: Drupal\drupilot\Plugin\McpTool\Node\DeleteNodeTool
+    arguments:
+      - '@entity_type.manager'
+      - '@current_user'
+      - '@logger.channel.drupilot'
+    tags:
+      - { name: mcp_tool }
+
+  drupilot.tool.node_list:
+    class: Drupal\drupilot\Plugin\McpTool\Node\ListNodesTool
+    arguments:
+      - '@entity_type.manager'
+      - '@logger.channel.drupilot'
+    tags:
+      - { name: mcp_tool }
+
+  # Taxonomy — vocabulary tools
+  drupilot.tool.vocabulary_create:
+    class: Drupal\drupilot\Plugin\McpTool\Taxonomy\CreateVocabularyTool
+    arguments:
+      - '@entity_type.manager'
+      - '@logger.channel.drupilot'
+    tags:
+      - { name: mcp_tool }
+
+  drupilot.tool.vocabulary_update:
+    class: Drupal\drupilot\Plugin\McpTool\Taxonomy\UpdateVocabularyTool
+    arguments:
+      - '@entity_type.manager'
+      - '@logger.channel.drupilot'
+    tags:
+      - { name: mcp_tool }
+
+  drupilot.tool.vocabulary_delete:
+    class: Drupal\drupilot\Plugin\McpTool\Taxonomy\DeleteVocabularyTool
+    arguments:
+      - '@entity_type.manager'
+      - '@logger.channel.drupilot'
+    tags:
+      - { name: mcp_tool }
+
+  drupilot.tool.vocabulary_list:
+    class: Drupal\drupilot\Plugin\McpTool\Taxonomy\ListVocabulariesTool
+    arguments:
+      - '@entity_type.manager'
+      - '@logger.channel.drupilot'
+    tags:
+      - { name: mcp_tool }
+
+  # Taxonomy — term tools
+  drupilot.tool.term_create:
+    class: Drupal\drupilot\Plugin\McpTool\Taxonomy\CreateTermTool
+    arguments:
+      - '@entity_type.manager'
+      - '@logger.channel.drupilot'
+    tags:
+      - { name: mcp_tool }
+
+  drupilot.tool.term_update:
+    class: Drupal\drupilot\Plugin\McpTool\Taxonomy\UpdateTermTool
+    arguments:
+      - '@entity_type.manager'
+      - '@logger.channel.drupilot'
+    tags:
+      - { name: mcp_tool }
+
+  drupilot.tool.term_delete:
+    class: Drupal\drupilot\Plugin\McpTool\Taxonomy\DeleteTermTool
+    arguments:
+      - '@entity_type.manager'
+      - '@logger.channel.drupilot'
+    tags:
+      - { name: mcp_tool }
+
+  drupilot.tool.term_list:
+    class: Drupal\drupilot\Plugin\McpTool\Taxonomy\ListTermsTool
+    arguments:
+      - '@entity_type.manager'
+      - '@logger.channel.drupilot'
+    tags:
+      - { name: mcp_tool }
+
+  # User tools
+  drupilot.tool.user_create:
+    class: Drupal\drupilot\Plugin\McpTool\User\CreateUserTool
+    arguments:
+      - '@entity_type.manager'
+      - '@logger.channel.drupilot'
+    tags:
+      - { name: mcp_tool }
+
+  drupilot.tool.user_update:
+    class: Drupal\drupilot\Plugin\McpTool\User\UpdateUserTool
+    arguments:
+      - '@entity_type.manager'
+      - '@logger.channel.drupilot'
+    tags:
+      - { name: mcp_tool }
+
+  drupilot.tool.user_delete:
+    class: Drupal\drupilot\Plugin\McpTool\User\DeleteUserTool
+    arguments:
+      - '@entity_type.manager'
+      - '@logger.channel.drupilot'
+    tags:
+      - { name: mcp_tool }
+
+  drupilot.tool.user_assign_role:
+    class: Drupal\drupilot\Plugin\McpTool\User\AssignRoleTool
+    arguments:
+      - '@entity_type.manager'
+      - '@logger.channel.drupilot'
+    tags:
+      - { name: mcp_tool }

@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Drupal\Tests\drupal_mcp\Kernel\Service;
+namespace Drupal\Tests\drupilot\Kernel\Service;
 
 use Drupal\KernelTests\KernelTestBase;
-use Drupal\drupal_mcp\Service\ToolRegistryService;
+use Drupal\drupilot\Service\ToolRegistryService;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\Group;
 use PHPUnit\Framework\Attributes\RunTestsInSeparateProcesses;
@@ -14,7 +14,7 @@ use PHPUnit\Framework\Attributes\RunTestsInSeparateProcesses;
  * Tests ToolRegistryService wiring and config persistence in the container.
  */
 #[CoversClass(ToolRegistryService::class)]
-#[Group('drupal_mcp')]
+#[Group('drupilot')]
 #[RunTestsInSeparateProcesses]
 final class ToolRegistryServiceKernelTest extends KernelTestBase {
 
@@ -34,7 +34,7 @@ final class ToolRegistryServiceKernelTest extends KernelTestBase {
     'media',
     'file',
     'image',
-    'drupal_mcp',
+    'drupilot',
   ];
 
   /**
@@ -42,14 +42,14 @@ final class ToolRegistryServiceKernelTest extends KernelTestBase {
    */
   protected function setUp(): void {
     parent::setUp();
-    $this->installConfig(['drupal_mcp']);
+    $this->installConfig(['drupilot']);
   }
 
   /**
    * Tests that the service is correctly wired in the container.
    */
   public function testServiceIsWiredInContainer(): void {
-    $registry = $this->container->get('drupal_mcp.tool_registry');
+    $registry = $this->container->get('drupilot.tool_registry');
 
     // @phpstan-ignore method.alreadyNarrowedType
     $this->assertInstanceOf(ToolRegistryService::class, $registry);
@@ -59,8 +59,8 @@ final class ToolRegistryServiceKernelTest extends KernelTestBase {
    * Tests that isEnabled() returns false by default for any tool.
    */
   public function testIsEnabledReturnsFalseByDefaultForAnyTool(): void {
-    /** @var \Drupal\drupal_mcp\Service\ToolRegistryService $registry */
-    $registry = $this->container->get('drupal_mcp.tool_registry');
+    /** @var \Drupal\drupilot\Service\ToolRegistryService $registry */
+    $registry = $this->container->get('drupilot.tool_registry');
 
     $this->assertFalse($registry->isEnabled('content_type_create'));
   }
@@ -69,8 +69,8 @@ final class ToolRegistryServiceKernelTest extends KernelTestBase {
    * Tests that getEnabledToolIds() returns an empty array by default.
    */
   public function testGetEnabledToolIdsReturnsEmptyArrayByDefault(): void {
-    /** @var \Drupal\drupal_mcp\Service\ToolRegistryService $registry */
-    $registry = $this->container->get('drupal_mcp.tool_registry');
+    /** @var \Drupal\drupilot\Service\ToolRegistryService $registry */
+    $registry = $this->container->get('drupilot.tool_registry');
 
     $this->assertSame([], $registry->getEnabledToolIds());
   }
@@ -79,8 +79,8 @@ final class ToolRegistryServiceKernelTest extends KernelTestBase {
    * Tests that enableTool() persists the tool to config and isEnabled() reflects it.
    */
   public function testEnableToolPersistsToConfig(): void {
-    /** @var \Drupal\drupal_mcp\Service\ToolRegistryService $registry */
-    $registry = $this->container->get('drupal_mcp.tool_registry');
+    /** @var \Drupal\drupilot\Service\ToolRegistryService $registry */
+    $registry = $this->container->get('drupilot.tool_registry');
 
     $registry->enableTool('content_type_create');
 
@@ -91,8 +91,8 @@ final class ToolRegistryServiceKernelTest extends KernelTestBase {
    * Tests that disableTool() removes the tool from config.
    */
   public function testDisableToolRemovesToolFromConfig(): void {
-    /** @var \Drupal\drupal_mcp\Service\ToolRegistryService $registry */
-    $registry = $this->container->get('drupal_mcp.tool_registry');
+    /** @var \Drupal\drupilot\Service\ToolRegistryService $registry */
+    $registry = $this->container->get('drupilot.tool_registry');
 
     $registry->enableTool('content_type_create');
     $registry->disableTool('content_type_create');
@@ -104,8 +104,8 @@ final class ToolRegistryServiceKernelTest extends KernelTestBase {
    * Tests that enableTool() is idempotent and does not duplicate entries.
    */
   public function testEnableToolIsIdempotent(): void {
-    /** @var \Drupal\drupal_mcp\Service\ToolRegistryService $registry */
-    $registry = $this->container->get('drupal_mcp.tool_registry');
+    /** @var \Drupal\drupilot\Service\ToolRegistryService $registry */
+    $registry = $this->container->get('drupilot.tool_registry');
 
     $registry->enableTool('content_type_create');
     $registry->enableTool('content_type_create');

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Drupal\drupal_mcp\Access;
+namespace Drupal\drupilot\Access;
 
 use Drupal\Core\Access\AccessResult;
 use Drupal\Core\Access\AccessResultInterface;
@@ -36,7 +36,7 @@ final class McpTokenAccessCheck implements AccessInterface {
    *   otherwise. Always uncacheable.
    */
   public function access(Request $request): AccessResultInterface {
-    $configured = $this->configFactory->get('drupal_mcp.settings')->get('bearer_token');
+    $configured = $this->configFactory->get('drupilot.settings')->get('bearer_token');
     if (!is_string($configured) || $configured === '') {
       return AccessResult::forbidden('MCP bearer token is not configured.')->setCacheMaxAge(0);
     }

@@ -2,16 +2,16 @@
 
 declare(strict_types=1);
 
-namespace Drupal\drupal_mcp\Plugin\McpTool\Role;
+namespace Drupal\drupilot\Plugin\McpTool\Role;
 
 use Drupal\Core\Entity\EntityStorageException;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Logger\LoggerChannelInterface;
 use Drupal\Core\Utility\Error;
-use Drupal\drupal_mcp\Attribute\McpTool;
-use Drupal\drupal_mcp\Plugin\McpTool\McpToolInterface;
-use Drupal\drupal_mcp\ValueObject\McpError;
-use Drupal\drupal_mcp\ValueObject\McpResponse;
+use Drupal\drupilot\Attribute\McpTool;
+use Drupal\drupilot\Plugin\McpTool\McpToolInterface;
+use Drupal\drupilot\ValueObject\McpError;
+use Drupal\drupilot\ValueObject\McpResponse;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
@@ -58,7 +58,7 @@ final class UpdateRoleTool implements McpToolInterface {
   ): static {
     return new static(
       $container->get('entity_type.manager'),
-      $container->get('logger.channel.drupal_mcp'),
+      $container->get('logger.channel.drupilot'),
     );
   }
 

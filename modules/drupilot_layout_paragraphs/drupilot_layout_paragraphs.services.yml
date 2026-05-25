@@ -1,0 +1,26 @@
+services:
+  drupilot_layout_paragraphs.tool.layout_list:
+    class: Drupal\drupilot_layout_paragraphs\Plugin\McpTool\Layout\ListLayoutsTool
+    arguments:
+      - '@plugin.manager.core.layout'
+      - '@logger.channel.drupilot'
+    tags:
+      - { name: mcp_tool }
+
+  drupilot_layout_paragraphs.tool.paragraph_type_configure_layout:
+    class: Drupal\drupilot_layout_paragraphs\Plugin\McpTool\Paragraph\ConfigureParagraphTypeLayoutTool
+    arguments:
+      - '@entity_type.manager'
+      - '@plugin.manager.core.layout'
+      - '@logger.channel.drupilot'
+    tags:
+      - { name: mcp_tool }
+
+  drupilot_layout_paragraphs.tool.paragraph_field_configure_layout_display:
+    class: Drupal\drupilot_layout_paragraphs\Plugin\McpTool\Field\ConfigureLayoutParagraphsDisplayTool
+    arguments:
+      - '@entity_type.manager'
+      - '@entity_field.manager'
+      - '@logger.channel.drupilot'
+    tags:
+      - { name: mcp_tool }

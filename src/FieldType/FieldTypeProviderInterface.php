@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Drupal\drupal_mcp\FieldType;
+namespace Drupal\drupilot\FieldType;
 
 /**
  * Contract for services that contribute field types to the MCP field_create tool.
  *
- * Tag your service with `drupal_mcp.field_type_provider` to have its types
+ * Tag your service with `drupilot.field_type_provider` to have its types
  * automatically included in the tool's supported-types list.
  */
 interface FieldTypeProviderInterface {

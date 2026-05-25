@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Drupal\drupal_mcp\ValueObject;
+namespace Drupal\drupilot\ValueObject;
 
 /**
  * Public description of a tool — id, metadata, and JSON Schema for inputs.

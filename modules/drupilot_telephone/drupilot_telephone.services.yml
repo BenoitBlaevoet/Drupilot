@@ -1,0 +1,5 @@
+services:
+  drupilot_telephone.field_type_provider:
+    class: Drupal\drupilot_telephone\FieldType\TelephoneFieldTypeProvider
+    tags:
+      - { name: drupilot.field_type_provider }

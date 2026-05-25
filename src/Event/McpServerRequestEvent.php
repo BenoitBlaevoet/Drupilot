@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Drupal\drupal_mcp\Event;
+namespace Drupal\drupilot\Event;
 
-use Drupal\drupal_mcp\ValueObject\McpRequest;
+use Drupal\drupilot\ValueObject\McpRequest;
 use Symfony\Contracts\EventDispatcher\Event;
 
 /**
@@ -14,7 +14,7 @@ use Symfony\Contracts\EventDispatcher\Event;
  */
 final class McpServerRequestEvent extends Event {
 
-  public const string EVENT_NAME = 'drupal_mcp.server_request';
+  public const string EVENT_NAME = 'drupilot.server_request';
 
   /**
    * Constructs the event.

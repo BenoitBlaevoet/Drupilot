@@ -1,0 +1,9 @@
+name: 'Drupilot — Layout Paragraphs'
+type: module
+description: 'Layout discovery, paragraph type layout configuration, and layout_paragraphs display wiring tools.'
+package: AI
+core_version_requirement: ^11
+dependencies:
+  - drupilot:drupilot
+  - drupilot:drupilot_paragraphs
+  - layout_paragraphs:layout_paragraphs

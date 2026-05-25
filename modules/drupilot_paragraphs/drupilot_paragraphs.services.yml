@@ -1,0 +1,37 @@
+services:
+  drupilot_paragraphs.field_type_provider:
+    class: Drupal\drupilot_paragraphs\FieldType\ParagraphsFieldTypeProvider
+    tags:
+      - { name: drupilot.field_type_provider }
+
+  drupilot_paragraphs.tool.paragraph_type_create:
+    class: Drupal\drupilot_paragraphs\Plugin\McpTool\Paragraph\CreateParagraphTypeTool
+    arguments:
+      - '@entity_type.manager'
+      - '@logger.channel.drupilot'
+    tags:
+      - { name: mcp_tool }
+
+  drupilot_paragraphs.tool.paragraph_type_update:
+    class: Drupal\drupilot_paragraphs\Plugin\McpTool\Paragraph\UpdateParagraphTypeTool
+    arguments:
+      - '@entity_type.manager'
+      - '@logger.channel.drupilot'
+    tags:
+      - { name: mcp_tool }
+
+  drupilot_paragraphs.tool.paragraph_type_delete:
+    class: Drupal\drupilot_paragraphs\Plugin\McpTool\Paragraph\DeleteParagraphTypeTool
+    arguments:
+      - '@entity_type.manager'
+      - '@logger.channel.drupilot'
+    tags:
+      - { name: mcp_tool }
+
+  drupilot_paragraphs.tool.paragraph_type_list:
+    class: Drupal\drupilot_paragraphs\Plugin\McpTool\Paragraph\ListParagraphTypesTool
+    arguments:
+      - '@entity_type.manager'
+      - '@logger.channel.drupilot'
+    tags:
+      - { name: mcp_tool }

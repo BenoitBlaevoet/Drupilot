@@ -1,0 +1,13 @@
+name: 'Drupilot'
+type: module
+description: 'Exposes an MCP (Model Context Protocol) server over HTTP for AI agent control of Drupal.'
+package: AI
+core_version_requirement: ^11
+dependencies:
+  - drupal:node
+  - drupal:taxonomy
+  - drupal:user
+  - drupal:field
+  - drupal:field_ui
+  - drupal:text
+  - drupal:media

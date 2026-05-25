@@ -1,4 +1,4 @@
-# Drupal MCP
+# Drupilot
 
 Exposes a **Model Context Protocol (MCP) server** over HTTP so that an AI agent can
 exercise full programmatic control over a Drupal 11 site: creating content types,
@@ -21,35 +21,35 @@ disabled by default and must be explicitly enabled by a site administrator.
 
 ## Installation
 
-Place the module in `web/modules/custom/drupal_mcp/` (or install via Composer if
+Place the module in `web/modules/custom/drupilot/` (or install via Composer if
 packaged), then enable it:
 
 ```bash
 # Core MCP server only (no admin UI)
-drush en drupal_mcp -y
+drush en drupilot -y
 
 # Core + admin UI (recommended for initial setup)
-drush en drupal_mcp drupal_mcp_ui -y
+drush en drupilot drupilot_ui -y
 
 drush cr
 ```
 
 ### Sub-modules
 
-All sub-modules live in `drupal_mcp/modules/` and are auto-discovered by Drupal.
+All sub-modules live in `drupilot/modules/` and are auto-discovered by Drupal.
 Enable only the ones you need.
 
 | Sub-module | Requires | What it adds |
 |---|---|---|
-| `drupal_mcp_ui` | — | Admin UI: bearer-token form + tool toggle form |
-| `drupal_mcp_link` | `drupal:link` | `link` field type in `field_create` |
-| `drupal_mcp_telephone` | `drupal:telephone` | `telephone` field type in `field_create` |
-| `drupal_mcp_daterange` | `drupal:datetime_range` | `daterange` field type in `field_create` |
-| `drupal_mcp_paragraphs` | `paragraphs`, `entity_reference_revisions` | `entity_reference_revisions` field type + `paragraph_type_*` tools |
-| `drupal_mcp_field_group` | `field_group` | `field_group_*` tools for display grouping |
-| `drupal_mcp_layout_paragraphs` | `layout_paragraphs`, `drupal_mcp_paragraphs` | `layout_list` + `paragraph_type_configure_layout` + `paragraph_field_configure_layout_display` tools |
+| `drupilot_ui` | — | Admin UI: bearer-token form + tool toggle form |
+| `drupilot_link` | `drupal:link` | `link` field type in `field_create` |
+| `drupilot_telephone` | `drupal:telephone` | `telephone` field type in `field_create` |
+| `drupilot_daterange` | `drupal:datetime_range` | `daterange` field type in `field_create` |
+| `drupilot_paragraphs` | `paragraphs`, `entity_reference_revisions` | `entity_reference_revisions` field type + `paragraph_type_*` tools |
+| `drupilot_field_group` | `field_group` | `field_group_*` tools for display grouping |
+| `drupilot_layout_paragraphs` | `layout_paragraphs`, `drupilot_paragraphs` | `layout_list` + `paragraph_type_configure_layout` + `paragraph_field_configure_layout_display` tools |
 
-**`drupal_mcp_ui`** provides two admin forms:
+**`drupilot_ui`** provides two admin forms:
 
 - **`/admin/config/services/mcp`** — set the bearer token
 - **`/admin/config/services/mcp/tools`** — enable or disable individual tools
@@ -71,19 +71,19 @@ secret and never commit it to version control.
 openssl rand -hex 32
 ```
 
-**With `drupal_mcp_ui` enabled:**
+**With `drupilot_ui` enabled:**
 1. Go to **Administration → Configuration → Web services → MCP server settings**
    (`/admin/config/services/mcp`)
 2. Paste the token and save.
 
 **Without the UI — Drush:**
 ```bash
-drush config-set drupal_mcp.settings bearer_token "your-secret-token"
+drush config-set drupilot.settings bearer_token "your-secret-token"
 ```
 
 **Without the UI — config YAML (for deployment pipelines):**
 
-Create or update `config/drupal_mcp.settings.yml`:
+Create or update `config/drupilot.settings.yml`:
 ```yaml
 bearer_token: 'your-secret-token'
 enabled_tools: []
@@ -96,7 +96,7 @@ drush cim --partial --source=/path/to/config/directory
 **Without the UI — settings.php override (environment-based):**
 ```php
 // web/sites/default/settings.local.php
-$config['drupal_mcp.settings']['bearer_token'] = getenv('MCP_BEARER_TOKEN');
+$config['drupilot.settings']['bearer_token'] = getenv('MCP_BEARER_TOKEN');
 ```
 
 ---
@@ -106,21 +106,21 @@ $config['drupal_mcp.settings']['bearer_token'] = getenv('MCP_BEARER_TOKEN');
 All tools are **disabled by default**. You must explicitly enable the ones you want
 to expose.
 
-**With `drupal_mcp_ui` enabled:**
+**With `drupilot_ui` enabled:**
 1. Go to **Administration → Configuration → Web services → MCP tools**
    (`/admin/config/services/mcp/tools`)
 2. Check the tools you want to enable and save.
 
 **Without the UI — Drush:**
 ```bash
-drush config-set drupal_mcp.settings enabled_tools \
+drush config-set drupilot.settings enabled_tools \
   '["content_type_create","content_type_list","node_create","node_list"]' \
   --input-format=json
 ```
 
 **Without the UI — config YAML:**
 ```yaml
-# config/drupal_mcp.settings.yml
+# config/drupilot.settings.yml
 bearer_token: 'your-secret-token'
 enabled_tools:
   - content_type_create
@@ -249,13 +249,13 @@ Response on error:
 | `field_list` | List fields on a bundle | `entity_type`, `bundle` |
 | `paragraph_field_configure_layout_display` | Switch a paragraphs field's widget and formatter to `layout_paragraphs` | `entity_type`, `bundle`, `field_name` |
 
-> **`paragraph_field_configure_layout_display`** requires the `drupal_mcp_layout_paragraphs` sub-module and only works on `entity_reference_revisions` fields.
+> **`paragraph_field_configure_layout_display`** requires the `drupilot_layout_paragraphs` sub-module and only works on `entity_reference_revisions` fields.
 > Optional parameters: `nesting_depth` (integer 0–5, default `0`), `require_layouts` (boolean, default `false`), `form_mode` (string, default `"default"`), `view_mode` (string, default `"default"`).
 
 > **Supported field types** depend on which sub-modules are active. The base module
 > provides: `boolean`, `datetime`, `decimal`, `email`, `entity_reference`, `file`,
 > `float`, `image`, `integer`, `list_string`, `string`, `text_long`.
-> Enable `drupal_mcp_link`, `drupal_mcp_telephone`, or `drupal_mcp_daterange` to
+> Enable `drupilot_link`, `drupilot_telephone`, or `drupilot_daterange` to
 > unlock additional types. The `field_type` enum returned by `tools/list` always
 > reflects what is currently active — no manual sync needed.
 
@@ -265,7 +265,7 @@ Response on error:
 
 ### field_group
 
-Requires the `drupal_mcp_field_group` sub-module (and the contrib `field_group` module).
+Requires the `drupilot_field_group` sub-module (and the contrib `field_group` module).
 
 | Tool ID | Description | Required arguments |
 |---|---|---|
@@ -277,7 +277,7 @@ Requires the `drupal_mcp_field_group` sub-module (and the contrib `field_group` 
 
 ### layout
 
-Requires the `drupal_mcp_layout_paragraphs` sub-module (and contrib `layout_paragraphs` + `drupal_mcp_paragraphs`).
+Requires the `drupilot_layout_paragraphs` sub-module (and contrib `layout_paragraphs` + `drupilot_paragraphs`).
 
 | Tool ID | Description | Required arguments |
 |---|---|---|
@@ -328,7 +328,7 @@ paragraph_field_configure_layout_display  { entity_type: "node", bundle: "articl
 
 ### paragraph_type
 
-Requires the `drupal_mcp_paragraphs` sub-module (and the contrib `paragraphs` + `entity_reference_revisions` modules).
+Requires the `drupilot_paragraphs` sub-module (and the contrib `paragraphs` + `entity_reference_revisions` modules).
 
 | Tool ID | Description | Required arguments |
 |---|---|---|
@@ -426,7 +426,7 @@ Valid `source` values: `image`, `file`, `oembed:video`, `audio_file`, `video_fil
 
 ## Connecting to an AI agent
 
-`drupal_mcp` implements the **MCP HTTP transport** (JSON-RPC over HTTP POST). Any
+`drupilot` implements the **MCP HTTP transport** (JSON-RPC over HTTP POST). Any
 MCP-compatible client — desktop apps, IDE extensions, CLI tools, or custom agents —
 can connect to it. The three values every client needs:
 
@@ -572,7 +572,7 @@ connection is working correctly.
 
 ### Pre-flight checklist
 
-- [ ] Bearer token set in `drupal_mcp.settings`
+- [ ] Bearer token set in `drupilot.settings`
 - [ ] At least one tool enabled
 - [ ] Site reachable over HTTPS from the client machine
 - [ ] Local dev: using a tunnel URL, not `localhost`
@@ -582,7 +582,7 @@ connection is working correctly.
 
 ## Extending: adding custom MCP tools
 
-Any Drupal module can add new MCP tools without patching `drupal_mcp`.
+Any Drupal module can add new MCP tools without patching `drupilot`.
 
 **1. Implement `McpToolInterface`:**
 ```php
@@ -593,9 +593,9 @@ declare(strict_types=1);
 namespace Drupal\my_module\Plugin\McpTool;
 
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
-use Drupal\drupal_mcp\Attribute\McpTool;
-use Drupal\drupal_mcp\Plugin\McpTool\McpToolInterface;
-use Drupal\drupal_mcp\ValueObject\McpResponse;
+use Drupal\drupilot\Attribute\McpTool;
+use Drupal\drupilot\Plugin\McpTool\McpToolInterface;
+use Drupal\drupilot\ValueObject\McpResponse;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 #[McpTool(
@@ -645,7 +645,7 @@ final class MyCustomActionTool implements McpToolInterface {
 **2. Enable the tool:**
 ```bash
 # After clearing caches, the tool appears in tools/list when enabled:
-drush config-set drupal_mcp.settings enabled_tools \
+drush config-set drupilot.settings enabled_tools \
   '["my_custom_action"]' --input-format=json
 ```
 
@@ -669,7 +669,7 @@ declare(strict_types=1);
 
 namespace Drupal\my_module\FieldType;
 
-use Drupal\drupal_mcp\FieldType\FieldTypeProviderInterface;
+use Drupal\drupilot\FieldType\FieldTypeProviderInterface;
 
 final class MyFieldTypeProvider implements FieldTypeProviderInterface {
 
@@ -687,7 +687,7 @@ services:
   my_module.field_type_provider:
     class: Drupal\my_module\FieldType\MyFieldTypeProvider
     tags:
-      - { name: drupal_mcp.field_type_provider }
+      - { name: drupilot.field_type_provider }
 ```
 
 After `drush cr`, `my_custom_type` appears automatically in the `field_type` enum

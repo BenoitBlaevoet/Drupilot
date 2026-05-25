@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Drupal\Tests\drupal_mcp\Functional;
+namespace Drupal\Tests\drupilot\Functional;
 
 use Drupal\Tests\BrowserTestBase;
 use PHPUnit\Framework\Attributes\Group;
@@ -11,7 +11,7 @@ use PHPUnit\Framework\Attributes\RunTestsInSeparateProcesses;
 /**
  * Functional tests for the MCP HTTP endpoint (POST /mcp/v1).
  */
-#[Group('drupal_mcp')]
+#[Group('drupilot')]
 #[RunTestsInSeparateProcesses]
 final class McpEndpointTest extends BrowserTestBase {
 
@@ -31,7 +31,7 @@ final class McpEndpointTest extends BrowserTestBase {
     'media',
     'file',
     'image',
-    'drupal_mcp',
+    'drupilot',
   ];
 
   /**
@@ -56,7 +56,7 @@ final class McpEndpointTest extends BrowserTestBase {
     parent::setUp();
 
     // Store bearer token in config.
-    $this->config('drupal_mcp.settings')
+    $this->config('drupilot.settings')
       ->set('bearer_token', self::TOKEN)
       ->save();
   }
@@ -227,8 +227,8 @@ final class McpEndpointTest extends BrowserTestBase {
    * Tests that enabling a tool makes it appear in the tools/list response.
    */
   public function testEnabledToolAppearsInToolsList(): void {
-    /** @var \Drupal\drupal_mcp\Service\ToolRegistryService $registry */
-    $registry = $this->container->get('drupal_mcp.tool_registry');
+    /** @var \Drupal\drupilot\Service\ToolRegistryService $registry */
+    $registry = $this->container->get('drupilot.tool_registry');
     $registry->enableTool('content_type_create');
 
     $result = $this->postJson('Bearer ' . self::TOKEN, $this->toolsListBody());
@@ -242,8 +242,8 @@ final class McpEndpointTest extends BrowserTestBase {
    * Tests that tools/call on an enabled content_type_create tool creates a content type.
    */
   public function testToolsCallContentTypeCreateCreatesContentType(): void {
-    /** @var \Drupal\drupal_mcp\Service\ToolRegistryService $registry */
-    $registry = $this->container->get('drupal_mcp.tool_registry');
+    /** @var \Drupal\drupilot\Service\ToolRegistryService $registry */
+    $registry = $this->container->get('drupilot.tool_registry');
     $registry->enableTool('content_type_create');
 
     $result = $this->postJson(
@@ -270,8 +270,8 @@ final class McpEndpointTest extends BrowserTestBase {
    * Tests that tools/call on content_type_delete removes an existing content type.
    */
   public function testToolsCallContentTypeDeleteDeletesContentType(): void {
-    /** @var \Drupal\drupal_mcp\Service\ToolRegistryService $registry */
-    $registry = $this->container->get('drupal_mcp.tool_registry');
+    /** @var \Drupal\drupilot\Service\ToolRegistryService $registry */
+    $registry = $this->container->get('drupilot.tool_registry');
     $registry->enableTool('content_type_create');
     $registry->enableTool('content_type_delete');
 

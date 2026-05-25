@@ -1,0 +1,4 @@
+'administer drupilot settings':
+  title: 'Administer drupilot settings'
+  description: 'Manage drupilot UI screens (bearer token, tool toggles).'
+  restrict access: true

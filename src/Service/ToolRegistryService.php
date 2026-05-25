@@ -2,18 +2,18 @@
 
 declare(strict_types=1);
 
-namespace Drupal\drupal_mcp\Service;
+namespace Drupal\drupilot\Service;
 
 use Drupal\Core\Config\ConfigFactoryInterface;
 
 /**
  * Owns the enabled/disabled state of every MCP tool.
  *
- * State is persisted under drupal_mcp.settings:enabled_tools.
+ * State is persisted under drupilot.settings:enabled_tools.
  */
 final class ToolRegistryService {
 
-  private const string CONFIG_NAME = 'drupal_mcp.settings';
+  private const string CONFIG_NAME = 'drupilot.settings';
   private const string CONFIG_KEY = 'enabled_tools';
 
   /**

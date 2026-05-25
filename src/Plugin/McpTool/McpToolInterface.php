@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Drupal\drupal_mcp\Plugin\McpTool;
+namespace Drupal\drupilot\Plugin\McpTool;
 
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
-use Drupal\drupal_mcp\ValueObject\McpResponse;
+use Drupal\drupilot\ValueObject\McpResponse;
 
 /**
  * Contract every MCP tool plugin must implement.
@@ -29,7 +29,7 @@ interface McpToolInterface extends ContainerFactoryPluginInterface {
    * @param array<string, mixed> $input
    *   Arguments forwarded from the MCP request.
    *
-   * @return \Drupal\drupal_mcp\ValueObject\McpResponse
+   * @return \Drupal\drupilot\ValueObject\McpResponse
    *   The response value object.
    */
   public function execute(array $input): McpResponse;

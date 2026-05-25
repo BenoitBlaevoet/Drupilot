@@ -1,0 +1,7 @@
+name: 'Drupilot UI'
+type: module
+description: 'Administration UI for the Drupilot module (bearer token, tool toggles).'
+package: AI
+core_version_requirement: ^11
+dependencies:
+  - drupilot:drupilot

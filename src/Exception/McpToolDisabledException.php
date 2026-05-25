@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Drupal\drupal_mcp\Exception;
+namespace Drupal\drupilot\Exception;
 
 /**
  * Thrown when a tool is invoked while disabled in configuration.

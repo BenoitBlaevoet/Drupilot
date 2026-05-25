@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Drupal\Tests\drupal_mcp\Unit\ValueObject;
+namespace Drupal\Tests\drupilot\Unit\ValueObject;
 
 use Drupal\Tests\UnitTestCase;
-use Drupal\drupal_mcp\ValueObject\McpError;
+use Drupal\drupilot\ValueObject\McpError;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\Group;
 
@@ -13,7 +13,7 @@ use PHPUnit\Framework\Attributes\Group;
  * Tests McpError constants and serialisation.
  */
 #[CoversClass(McpError::class)]
-#[Group('drupal_mcp')]
+#[Group('drupilot')]
 final class McpErrorTest extends UnitTestCase {
 
   /**
